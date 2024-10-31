@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Form Example</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<h1>Form with GET</h1>
+<form action="/roundrobin">
+    <label for="operation">Operation (Linear Search, BinarySearch):</label><br>
+    <input type="text" id="operation" name="operation"><br><br>
+
+    <label for="list">List with numbers</label><br>
+    <input type="text" id="list" name="list"><br><br>
+
+    <label for="value">Value To Search</label><br>
+    <input type="text" id="value" name="value"><br><br>
+    <input type="button" value="Submit" onclick="doOperation()">
+</form>
+<div id="getrespmsg"></div>
+
+<script>
+    function doOperation() {
+        let operation = document.getElementById("operation").value;
+        let list = document.getElementById("list").value;
+        let value = document.getElementById("value").value;
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = function() {
+            document.getElementById("getrespmsg").innerHTML =
+            this.responseText;
+        }
+        xhttp.open("GET", "/roundrobin?operation="+operation+"&list="+list+"&value="+value);
+        xhttp.send();
+    }
+</script>
+
+</body>
+</html>
